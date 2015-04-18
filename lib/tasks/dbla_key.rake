@@ -14,7 +14,7 @@ module Dbla
     end
   end
 end
-namespace :Dbla do
+namespace :dbla do
   namespace :key do
     task get: :environment do
       if ENV['email']

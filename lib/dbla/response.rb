@@ -6,11 +6,12 @@ module Dbla
       @request_params = request_params
       self.document_model = options[:solr_document_model] || options[:document_model] || Item
       self.blacklight_config = options[:blacklight_config]
-      # {"count":228,"start":0,"limit":10,"docs"
-      @total = data['count']
-      @documents = (data['docs'] || []).map {|d| document_model.new(d,self)}
-      @start = data['start']
-      @limit = data['limit']
+      if data
+        @total = data['count']
+        @documents = (data['docs'] || []).map {|d| document_model.new(d,self)}
+        @start = data['start']
+        @limit = data['limit']
+      end
     end
   end
 end

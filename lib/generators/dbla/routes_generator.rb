@@ -10,7 +10,7 @@ module Dbla
    1. Adds routes for your controller
          """
 
-    def inject_blacklight_routes
+    def inject_dbla_routes
       # These will end up in routes.rb file in reverse order
       # we add em, since each is added at the top of file. 
       # we want "root" to be FIRST for optimal url generation. 

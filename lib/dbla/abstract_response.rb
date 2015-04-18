@@ -26,6 +26,10 @@ module Dbla
       params[:sort]
     end
 
+    # Facets are built from this method's output
+    def aggregations
+      {}
+    end
     # secret api
     def grouped?
       false
