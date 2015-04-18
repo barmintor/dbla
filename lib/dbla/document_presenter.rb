@@ -4,6 +4,8 @@ module Dbla
     include ActionView::Helpers::TagHelper
     extend Deprecation
 
+    DESCRIPTIVE_METADATA_KEY = 'sourceResource'.freeze
+
     # @param [Item or Collection] document
     # @param [ActionController::Base] controller scope for linking and generating urls
     # @param [Blacklight::Configuration] configuration
@@ -19,7 +21,7 @@ module Dbla
     # @param [SolrDocument] document
     # @return [String]
     def document_heading
-      @document['sourceResource']['title']
+      @document[DESCRIPTIVE_METADATA_KEY]['title']
     end
     ##
     # Get the document's "title" to display in the <title> element.
@@ -28,7 +30,7 @@ module Dbla
     # @see #document_heading
     # @return [String]
     def document_show_html_title
-      @document['sourceResource']['title']
+      @document[DESCRIPTIVE_METADATA_KEY]['title']
     end
     ##
     # Render a value (or array of values) from a field
