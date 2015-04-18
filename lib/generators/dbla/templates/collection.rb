@@ -35,8 +35,8 @@ class Collection
 
   def has? f, *values
     # these are shenanigans to find a nested field
-    if f.is_a? String and f.index('/')
-      f = f.split('/')
+    if f.is_a? String and f.index('.')
+      f = f.split('.')
       f.inject(self) {|m,v| (m || {})[v]}
     else
       super

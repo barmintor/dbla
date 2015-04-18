@@ -49,7 +49,7 @@ module Dbla
     def render_document_index_label field, opts ={}
       if Symbol === field
         # these are shenanigans to find a nested field
-        field.to_s.split('/').inject(@document) {|m,v| m[v]}
+        field.to_s.split('.').inject(@document) {|m,v| m[v]}
       elsif Proc === field
         field.call
       else
