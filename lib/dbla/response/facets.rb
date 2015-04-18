@@ -22,7 +22,7 @@ module Dbla::Response::Facets
 
     private
     def default_limit
-      100
+      Dbla.config.fetch(:facet_field_default_limit, 100)
     end
 
     def default_sort
