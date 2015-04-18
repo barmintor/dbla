@@ -12,7 +12,16 @@ module Dbla
       data = nil
       #TODO Move this into a SearchBuilder, add a generator
       if params['q']
-        q = "?api_key=#{api_key}&q=#{params['q']}&facets=sourceResource.format"
+        q = "?api_key=#{api_key}&q=#{params['q']}"
+        fq = []
+        blacklight_config.facet_fields.each do |f|
+          # [fiendName, facetConfig]
+          next unless f[0] =~ /^(sourceResource|provider|object|intermediateProvider|dataProvider)/
+          fqv = f[0]
+          fqv = fqv + ':' + f[1].pin if f[1].pin
+          fq << fqv
+        end
+        q << "&facets=#{fq.join(',')}" unless fq.empty?
         if params.page
           q << "&page=#{params.page}"
         end
