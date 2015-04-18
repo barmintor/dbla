@@ -14,15 +14,11 @@ module Dbla
       header['params'] || request_params
     end
 
-    def start
-      @start
-    end
-
-    def rows
-      @limit
-    end
+    alias_method :rows, :limit
 
     def sort
+      # REVIEW: There are mixed style key accesses (strings and symbols);
+      # Could/Should this be "normalized"?
       params[:sort]
     end
 
