@@ -7,8 +7,8 @@ require "dbla/version"
 Gem::Specification.new do |s|
   s.name        = "dbla"
   s.version     = Dbla::VERSION
-  s.authors     = ["Audrey Altman","Ben Armintor"]
-  s.email       = ["audrey@dp.la", "armintor@gmail.com"]
+  s.authors     = ["Audrey Altman","Ben Armintor","Jeremy Friesen"]
+  s.email       = ["audrey@dp.la", "armintor@gmail.com","jeremy.n.friesen@gmail.com"]
   s.homepage    = "https://github.com/barmintor/dbla"
   s.summary     = "Rails engine to put BL on DPLA"
   s.description = "Rails engine to put BL on DPLA -> DBLA"
