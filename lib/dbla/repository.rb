@@ -12,12 +12,15 @@ module Dbla
       data = nil
       #TODO Move this into a SearchBuilder, add a generator
       if params['q']
-        q = "?api_key=#{api_key}&q=#{params['q']}"
+        q = "?api_key=#{api_key}&q=#{params['q']}&facets=sourceResource.format"
         if params.page
             q << "&page=#{params.page}"
         end
         if params.rows
             q << "&page_size=#{params.rows}"
+        end
+        params.facet_filters do |facet_field, value|
+          q << "&#{facet_field}=#{CGI::escape(value)}"
         end
         puts url + q
         data = get(url + q)

@@ -12,4 +12,5 @@ module Dbla
   autoload :Repository, 'dbla/repository'
   autoload :Response, 'dbla/response'
   autoload :Routes, 'dbla/routes'
+  autoload :SearchBuilderBehavior, 'dbla/search_builder_behavior'
 end
