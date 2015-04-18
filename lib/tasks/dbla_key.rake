@@ -10,7 +10,7 @@ module Dbla
     }
     def self.usage(key=:all)
       puts "Usage:"
-      USAGE.select {|k,v| k == key || key == :all}.each{|k,v| puts v} 
+      USAGE.select {|k,v| k == key || key == :all}.each{|k,v| puts v}
     end
   end
 end
@@ -43,9 +43,9 @@ namespace :dbla do
     end
     task config: :environment do
       if ENV['key']
-          open(Dbla.config_path,'a') do |blob|
-            blob.write YAML.dump('api_key' => ENV['key'])
-          end
+        open(Dbla.config_path,'a') do |blob|
+          blob.write YAML.dump('api_key' => ENV['key'])
+        end
       else
         Dbla::ApiKey.usage(:config)
       end

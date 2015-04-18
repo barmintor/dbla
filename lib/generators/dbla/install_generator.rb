@@ -1,8 +1,8 @@
 module Dbla
   class Install < Rails::Generators::Base
-    
+
     source_root File.expand_path('../templates', __FILE__)
-    
+
     argument     :controller_name, type: :string , default: "catalog"
     argument     :search_builder_name, type: :string , default: "search_builder"
 
@@ -15,11 +15,11 @@ module Dbla
 
     # Copy all files in templates/public/ directory to public/
     # Call external generator in AssetsGenerator, so we can
-    # leave that callable seperately too. 
-    def copy_public_assets 
+    # leave that callable seperately too.
+    def copy_public_assets
       generate "dbla:assets"
     end
-    
+
     def generate_search_builder
       generate 'dbla:search_builder', search_builder_name
     end

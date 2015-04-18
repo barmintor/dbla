@@ -87,7 +87,7 @@ module Dbla
     # Rendering:
     #   - helper_method
     #   - link_to_search
-    # TODO : maybe this should be merged with render_field_value, and the ugly signature 
+    # TODO : maybe this should be merged with render_field_value, and the ugly signature
     # simplified by pushing some of this logic into the "model"
     # @param [SolrDocument] document
     # @param [String] field name
