@@ -19,12 +19,12 @@ module Dbla::Response::Facets
     def offset
       @options[:offset] || default_offset
     end
-    
+
     private
     def default_limit
       100
     end
-    
+
     def default_sort
       if limit > 0
         'count'
@@ -32,7 +32,7 @@ module Dbla::Response::Facets
         'index'
       end
     end
-    
+
     def default_offset
       0
     end
@@ -47,7 +47,7 @@ module Dbla::Response::Facets
 
       options[:value] = value if value
       options[:hits] = hits if hits
-      
+
       super(options)
     end
 
