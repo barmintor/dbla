@@ -67,7 +67,7 @@ module Dbla
     #   @param [Hash] opts
     #   @options opts [String] :value
     def render_index_field_value field, options = {}
-
+        field.to_s.split('.').inject(@document) {|m,v| m[v]}
     end
     ##
     # Render the show field value for a document
@@ -78,6 +78,7 @@ module Dbla
     #   @param [Hash] options
     #   @options opts [String] :value
     def render_document_show_field_value field, options={}
+        field.to_s.split('.').inject(@document) {|m,v| m[v]}
     end
 
     ##
