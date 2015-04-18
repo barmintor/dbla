@@ -20,6 +20,7 @@ module Dbla
           q << "&page_size=#{params.rows}"
         end
         params.facet_filters do |facet_field, value|
+          value = "\"#{value}\"" if value.index(' ')
           q << "&#{facet_field}=#{CGI::escape(value)}"
         end
         puts url + q
