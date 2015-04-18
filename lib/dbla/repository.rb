@@ -37,11 +37,12 @@ module Dbla
       end
     end
     def api_key
-      Dbla.config[:api_key]
+      Dbla.config.fetch(:api_key)
     end
 
     def url
-      @url ||= (Dbla.config[:url] + blacklight_config.document_model.name.downcase.pluralize).freeze
+      # REVIEW: What if the URL does not have a trailing /; Should it be `File.join?`
+      @url ||= (Dbla.config.fetch(:url) + blacklight_config.document_model.name.downcase.pluralize).freeze
     end
 
   end
