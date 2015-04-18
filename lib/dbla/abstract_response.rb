@@ -31,6 +31,10 @@ module Dbla
       {}
     end
     # secret api
+    def export_formats
+      {}
+    end
+
     def grouped?
       false
     end
