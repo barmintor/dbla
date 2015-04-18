@@ -4,9 +4,9 @@ module Dbla
   module ApiKey
     RESOURCE = 'http://api.dp.la/v2/api_key/'.freeze
     USAGE = {
-      get:    "       rake Dbla:key:get email=YOUR.EMAIL@SERVER.ORG",
-      config: "       rake Dbla:key:config key=YOURKEY000000000000000000000000",
-      report: "       rake Dbla:key:report",
+      get:    "       rake dbla:key:get email=YOUR.EMAIL@SERVER.ORG",
+      config: "       rake dbla:key:config key=YOURKEY000000000000000000000000",
+      report: "       rake dbla:key:report",
     }
     def self.usage(key=:all)
       puts "Usage:"
@@ -18,7 +18,7 @@ namespace :dbla do
   namespace :key do
     task get: :environment do
       if ENV['email']
-        uri = URI(RESOURCE + email)
+        uri = URI(Dbla::ApiKey::RESOURCE + ENV['email'])
         Net::HTTP.start(uri.host, uri.port) do |http|
           request = Net::HTTP::Post.new uri
           response = http.request request
@@ -43,8 +43,10 @@ namespace :dbla do
     end
     task config: :environment do
       if ENV['key']
-        open(Dbla.config_path,'a') do |blob|
-          blob.write YAML.dump('api_key' => ENV['key'])
+        config = YAML.load(File.read(Dbla.config_path))
+        config['api_key'] = ENV['key']
+        open(Dbla.config_path,'w') do |blob|
+          blob.write YAML.dump(config)
         end
       else
         Dbla::ApiKey.usage(:config)
