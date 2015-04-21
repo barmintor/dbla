@@ -29,6 +29,11 @@ describe Dbla::Document do
 				expect(subject['o.hai.wut']).to eql([])
 			end
 		end
+		describe "fetch" do
+			it do
+				expect(subject.fetch('o.hai.wut','foo')).to eql('foo')
+			end
+		end
 		describe "has?" do
 			it "should work with only a key" do
 				expect(subject.has? 'foo').to eql(true)

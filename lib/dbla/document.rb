@@ -26,6 +26,9 @@ module Dbla
         _source.send :[], *args
       end
     end
+    def fetch(field, default)
+      (r = self[field]).empty? ? default : r
+    end
     def has? f, *values
       if values.empty?
         !self[f].empty?
