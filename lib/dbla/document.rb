@@ -26,5 +26,12 @@ module Dbla
         _source.send :[], *args
       end
     end
+    def has? f, *values
+      if values.empty?
+        !self[f].empty?
+      else
+        !(self[f] & values).empty?
+      end
+    end
   end
 end

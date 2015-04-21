@@ -34,13 +34,4 @@ class Item
   # Recommendation: Use field names from Dublin Core
   use_extension( Blacklight::Document::DublinCore)    
 
-  def has? f, *values
-    # these are shenanigans to find a nested field
-    if f.is_a? String and f.index('.')
-      f = f.split('.')
-      f.inject(self) {|m,v| (m || {})[v]}
-    else
-      super
-    end
-  end
 end
