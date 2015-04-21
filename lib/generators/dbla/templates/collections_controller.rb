@@ -1,11 +1,14 @@
 # -*- encoding : utf-8 -*-
-class CatalogController < ApplicationController  
+class CollectionsController < ApplicationController  
   include Blacklight::Marc::Catalog
 
   include Blacklight::Catalog
 
   helper CollectionsHelper
 
+  def self.local_prefixes
+    super + ['catalog']
+  end
   configure_blacklight do |config|
     ## Default parameters to send to solr for all search-like requests. See also SearchBuilder#processed_parameters
     config.default_solr_params = { 
@@ -31,14 +34,14 @@ class CatalogController < ApplicationController
     #}
 
     config.repository_class = Dbla::Repository
-    config.document_model = Item
+    config.document_model = Collection
     config.response_model = Dbla::Response
     config.document_presenter_class = Dbla::DocumentPresenter
     config.search_builder_class = SearchBuilder
     # solr field configuration for search results/index views
-    config.index.title_field = 'sourceResource.title'
+    config.index.title_field = 'title'
     config.index.thumbnail_field = 'object'
-    config.index.display_type_field = 'ingestType'
+    config.index.display_type_field = Proc.new {'default'}
 
     # solr field configuration for document/show views
     #config.show.title_field = 'title_display'
@@ -63,12 +66,11 @@ class CatalogController < ApplicationController
     #
     # :show may be set to false if you don't want the facet to be drawn in the 
     # facet bar
-    config.add_facet_field 'sourceResource.format', label: 'By Format'
-    config.add_facet_field 'dataProvider', label: 'Contributing Institution'
-    config.add_facet_field 'provider.name', label: 'Partner'
-    config.add_facet_field 'sourceResource.language.name', label: 'By Language'
-    config.add_facet_field 'sourceResource.subject.name', label: 'By Subject'
-    config.add_facet_field 'sourceResource.collection.id', label: 'Collection', display: false
+    #config.add_facet_field 'sourceResource.format', label: 'By Format'
+    #config.add_facet_field 'dataProvider', label: 'Contributing Institution'
+    #config.add_facet_field 'provider.name', label: 'Partner'
+    #config.add_facet_field 'sourceResource.language.name', label: 'By Language'
+    #config.add_facet_field 'sourceResource.subject.name', label: 'By Subject'
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -77,10 +79,9 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display 
-    config.add_index_field 'sourceResource.format', :label => 'Format'
-    config.add_index_field 'sourceResource.creator', :label => 'Creator'
-    config.add_index_field 'sourceResource.collection.title', label: 'In Collection', :helper_method => 'dbla_collection_search_link'
-    config.add_index_field 'isShownAt', :label => 'View Object', :helper_method => 'dbla_external_link'
+    config.add_index_field 'description', :label => 'Description'
+    config.add_index_field 'ingestDate', :label => 'Ingest Date'
+    config.add_index_field 'id', :label => 'Search for', helper_method: 'dbla_collection_search_link'
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display 
 
@@ -157,4 +158,4 @@ class CatalogController < ApplicationController
     config.spell_max = 5
   end
 
-end 
+end

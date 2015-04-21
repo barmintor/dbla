@@ -52,7 +52,7 @@ Replace the following code in your CatalogController:
     config.index.display_type_field = 'format'
 ```
 
-With the Dbla options.
+With Dbla options.
 
 ```ruby
     config.repository_class = Dbla::Repository
@@ -63,6 +63,12 @@ With the Dbla options.
     config.index.title_field = 'sourceResource/title'
     config.index.thumbnail_field = 'object'
     config.index.display_type_field = 'format'
+```
+
+... or just copy the most recent mimicry of the DP.LA portal:
+
+```console
+rails g dbla:catalog
 ```
 
 6. Fire it up!

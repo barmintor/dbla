@@ -5,6 +5,7 @@ module Dbla
 
     def assets
       copy_file "catalog_controller.rb", "app/controllers/catalog_controller.rb"
+      copy_file "collections_controller.rb", "app/controllers/collections_controller.rb"
     end
   end
 end
