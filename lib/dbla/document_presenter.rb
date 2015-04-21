@@ -1,5 +1,5 @@
 module Dbla
-  class DocumentPresenter
+  class DocumentPresenter < Blacklight::DocumentPresenter
     include ActionView::Helpers::OutputSafetyHelper
     include ActionView::Helpers::TagHelper
     extend Deprecation
@@ -39,6 +39,7 @@ module Dbla
     # @param [Blacklight::Solr::Configuration::Field] solr field configuration
     # @return [String]
     def render_field_value value=nil, field_config=nil
+        super
     end
     ##
     # Render the document index heading
@@ -67,7 +68,7 @@ module Dbla
     #   @param [Hash] opts
     #   @options opts [String] :value
     def render_index_field_value field, options = {}
-        field.to_s.split('.').inject(@document) {|m,v| m[v]}
+        super
     end
     ##
     # Render the show field value for a document
@@ -78,7 +79,7 @@ module Dbla
     #   @param [Hash] options
     #   @options opts [String] :value
     def render_document_show_field_value field, options={}
-        field.to_s.split('.').inject(@document) {|m,v| m[v]}
+        super
     end
 
     ##
@@ -97,6 +98,7 @@ module Dbla
     # @param [Blacklight::Solr::Configuration::Field] solr field configuration
     # @param [Hash] options additional options to pass to the rendering helpers
     def get_field_values field, field_config, options = {}
+        super
     end
 
     ##

@@ -8,6 +8,7 @@ module Dbla
     @config ||= YAML.load(File.read(config_path)).symbolize_keys
   end
   autoload :AbstractResponse, 'dbla/abstract_response'
+  autoload :Document, 'dbla/document'
   autoload :DocumentPresenter, 'dbla/document_presenter'
   autoload :Repository, 'dbla/repository'
   autoload :Response, 'dbla/response'
