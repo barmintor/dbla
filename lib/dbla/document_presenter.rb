@@ -14,6 +14,9 @@ module Dbla
       @configuration = configuration
       @controller = controller
     end
+    def source_resource_title
+      @document[DESCRIPTIVE_METADATA_KEY] ? (@document[DESCRIPTIVE_METADATA_KEY]['title'] || @document['id']) : @document['id']
+    end
     ##
     # Get the value of the document's "title" field, or a placeholder
     # value (if empty)
@@ -21,7 +24,7 @@ module Dbla
     # @param [SolrDocument] document
     # @return [String]
     def document_heading
-      @document[DESCRIPTIVE_METADATA_KEY]['title']
+      source_resource_title
     end
     ##
     # Get the document's "title" to display in the <title> element.
@@ -30,7 +33,7 @@ module Dbla
     # @see #document_heading
     # @return [String]
     def document_show_html_title
-      @document[DESCRIPTIVE_METADATA_KEY]['title']
+      source_resource_title
     end
     ##
     # Render a value (or array of values) from a field
@@ -50,14 +53,7 @@ module Dbla
     # @option opts [String] :label Render the given string
     # @param [Symbol, Proc, String] field Render the given field or evaluate the proc or render the given string
     def render_document_index_label field, opts ={}
-      if Symbol === field
-        # these are shenanigans to find a nested field
-        field.to_s.split('.').inject(@document) {|m,v| m[v]}
-      elsif Proc === field
-        field.call
-      else
-        field
-      end
+      super
     end
     ##
     # Render the index field label for a document
