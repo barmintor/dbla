@@ -4,9 +4,6 @@ sudo: false
 rvm:
   - 2.2
 
-gemfile:
-  - gemfiles/gemfile.rails4.2
-
 env:
   global:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
