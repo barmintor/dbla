@@ -31,9 +31,9 @@ module Dbla
     end
     def has? f, *values
       if values.empty?
-        !self[f].empty?
+        !self[f].blank?
       else
-        !(self[f] & values).empty?
+        !(self[f] & values).blank?
       end
     end
   end
