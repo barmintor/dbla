@@ -28,6 +28,10 @@ module Dbla
       generate 'dbla:models'
     end
 
+    def generate_dbla_helper
+      generate 'dbla:helper'
+    end
+
     def generate_dbla_routes
       generate 'dbla:routes'
     end
