@@ -24,9 +24,11 @@ describe Dbla::Document do
 		describe "[]" do
 			it do
 				expect(subject['foo']).to eql('bar')
+				expect(subject['fob']).to eql(nil)
 				expect(subject['lol']).to eql(['wut', 'no'])
 				expect(subject['o.hai.rly']).to eql(['yarly','norly'])
-				expect(subject['o.hai.wut']).to eql([])
+				expect(subject['o.hai.wut']).to eql(nil)
+				expect(subject['p.hai.wut']).to eql(nil)
 			end
 		end
 		describe "fetch" do
@@ -37,10 +39,12 @@ describe Dbla::Document do
 		describe "has?" do
 			it "should work with only a key" do
 				expect(subject.has? 'foo').to eql(true)
+				expect(subject.has? 'fob').to eql(false)
 				expect(subject.has? 'o.hai.rly').to eql(true)
 				expect(subject.has? 'o.hai.rly','norly').to eql(true)
 				expect(subject.has? 'o.hai.rly','gnarly').to eql(false)
 				expect(subject.has? 'o.hai.wut').to eql(false)
+				expect(subject.has? 'p.hai.wut').to eql(false)
 			end
 			it "should work with a value" do
 			end

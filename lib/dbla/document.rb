@@ -4,7 +4,7 @@ module Dbla
     def [] *args
       if args.first && args.first.to_s.index('.')
         keys = args.first.to_s.split('.')
-        keys.inject(_source) do |m,key|
+        r = keys.inject(_source) do |m,key|
           # Array() has a special behavior we do not want for hashes
           m = (m.is_a? Array) ? m : [m]
             m.inject([]) do |m2, a|
@@ -22,12 +22,13 @@ module Dbla
             end
           end
         end
+        r.blank? ? nil : r
       else
         _source.send :[], *args
       end
     end
     def fetch(field, default)
-      (r = self[field]).empty? ? default : r
+      (r = self[field]).blank? ? default : r
     end
     def has? f, *values
       if values.empty?
