@@ -3,7 +3,6 @@ module Dbla
   class Routes < Blacklight::Routes
 
     def self.for(router, *resources)
-        raise_no_blacklight_secret_key unless Blacklight.secret_key
         options = resources.extract_options!
         resources.map!(&:to_sym)
 
@@ -20,7 +19,8 @@ module Dbla
         args = {only: [:show]}
         args[:constraints] = options[:constraints] if options[:constraints]
 
-        resources :item, args.merge(path: primary_resource, controller: primary_resource) do
+        get "items/opensearch", :as => "opensearch_items", :to => "#{primary_resource}#opensearch"
+        resources :items, args.merge(controller: primary_resource) do
           member do
             post "track"
           end
@@ -30,10 +30,11 @@ module Dbla
 
     def collection_routing(primary_resource)
       add_routes do |options|
-        args = {only: [:show]}
+        args = {}
         args[:constraints] = options[:constraints] if options[:constraints]
 
-        resources :collection, args.merge(path: primary_resource, controller: primary_resource) do
+        get "collections/opensearch", :as => "opensearch_collections", :to => "collections#opensearch"
+        resources :collections, args do
           member do
             post "track"
           end

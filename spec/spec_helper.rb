@@ -3,11 +3,17 @@ require 'yaml'
 ENV["environment"] ||= 'test'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../spec/dummy/config/environment.rb",  __FILE__)
-require 'rspec/rails'
 require 'blacklight'
+
+require 'rspec/rails'
+
 RSpec.configure do |config|
   config.mock_with :mocha
+  # allows RSpec to set up view/controller helper methods
+  config.infer_spec_type_from_file_location!
 end
+
+Dir[Pathname.new(File.expand_path("../helpers/**/*.rb", __FILE__))].each {|f| require f}
 
 def fixtures_path(path)
 	path = File.join("..","..","spec","fixtures",path)
