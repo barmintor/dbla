@@ -69,6 +69,9 @@ class CatalogController < ApplicationController
     config.add_facet_field 'sourceResource.language.name', label: 'By Language'
     config.add_facet_field 'sourceResource.subject.name', label: 'By Subject'
     config.add_facet_field 'sourceResource.collection.id', label: 'Collection', display: false
+    config.add_facet_field 'sourceResource.spatial.state', label: 'By US State'
+    config.add_facet_field 'sourceResource.spatial.country', label: 'By Country'
+   
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
